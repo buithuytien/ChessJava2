@@ -132,43 +132,43 @@ public class ChessModel {
 
     @Override
     public String toString() {
-        String desc = "";
+        String out = "";
 
         for (int row = 7; row >= 0; row--) {
-            desc += "" + row;
+            out += "" + row;
             for (int col = 0; col < 8; col++) {
                 Piece p = pieceAt(col, row);
                 if (p == null) {
-                    desc += " .";
+                    out += " .";
                 } else {
-                    desc += " ";
+                    out += " ";
                     switch (p.getRank()) {
                         case KING:
-                            desc += p.getPlayer() == Player.WHITE ? "k" : "K";
+                            out += p.getPlayer() == Player.WHITE ? "k" : "K";
                             break;
                         case QUEEN:
-                            desc += p.getPlayer() == Player.WHITE ? "q" : "Q";
+                            out += p.getPlayer() == Player.WHITE ? "q" : "Q";
                             break;
                         case BISHOP:
-                            desc += p.getPlayer() == Player.WHITE ? "b" : "B";
+                            out += p.getPlayer() == Player.WHITE ? "b" : "B";
                             break;
                         case ROOK:
-                            desc += p.getPlayer() == Player.WHITE ? "r" : "R";
+                            out += p.getPlayer() == Player.WHITE ? "r" : "R";
                             break;
                         case KNIGHT:
-                            desc += p.getPlayer() == Player.WHITE ? "n" : "N";
+                            out += p.getPlayer() == Player.WHITE ? "n" : "N";
                             break;
                         case PAWN:
-                            desc += p.getPlayer() == Player.WHITE ? "p" : "P";
+                            out += p.getPlayer() == Player.WHITE ? "p" : "P";
                             break;
                     }
                 }
             }
-            desc += "\n";
+            out += "\n";
         }
-        desc += "  0 1 2 3 4 5 6 7";
+        out += "  0 1 2 3 4 5 6 7";
 
-        return desc;
+        return out;
     }
 
 
@@ -177,6 +177,7 @@ public class ChessModel {
         System.out.println(it.next());
         printPiecesBox();
     }
+
 
     public List<Piece> getActivePieces(){
         List<Piece> piecesBoxClone = new ArrayList<Piece>();
@@ -206,6 +207,7 @@ public class ChessModel {
         return getWinner() != null;
     }
 
+    // handle special moves of a pawn
     private boolean checkPawnPromotion(Piece movingPiece, int toRow){
         if(! (movingPiece instanceof Pawn)) return false;
         if((movingPiece.getPlayer() == Player.WHITE && toRow == 7) ||

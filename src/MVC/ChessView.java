@@ -28,19 +28,19 @@ public class ChessView extends JPanel implements ChessViewInterface, MouseListen
 
     private Piece movingPiece;
 
-    HashMap<String, Image> keyNameValueImage;
+    HashMap<String, Image> filePath2Img;
     String[] imageFilePaths;
 
     public ChessView(IChessControllerUtils controllerUtilsDelegate){
         this.controllerUtilsDelegate = controllerUtilsDelegate;
 
-        keyNameValueImage = new HashMap<String, Image>();
+        filePath2Img = new HashMap<String, Image>();
         this.imageFilePaths = ChessConstants.getPieceImgPaths(); // from static class
 
         try{
             for(String imageName: imageFilePaths){
                 Image img = loadImage(imageName);
-                keyNameValueImage.put(imageName, img);
+                filePath2Img.put(imageName, img);
             }
         } catch(Exception e){
             e.printStackTrace();
@@ -77,7 +77,7 @@ public class ChessView extends JPanel implements ChessViewInterface, MouseListen
 
 
     private void drawPieceAtTile(Graphics g2, int row, int col, String imgName){
-        Image img = keyNameValueImage.get(imgName);
+        Image img = filePath2Img.get(imgName);
         g2.drawImage(img, col*cellSize + originX, row*cellSize + originY, cellSize, cellSize, null);
     }
 
